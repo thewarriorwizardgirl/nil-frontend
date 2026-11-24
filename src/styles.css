@@ -14,6 +14,7 @@
   --color-blue-deep: #203d4d;
   --color-paper: #f6f7f5;
   --footer-bar-height: 72px;
+  --header-height: 112px;
   --content-width: 1180px;
 }
 
@@ -43,7 +44,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 82px;
+  scroll-padding-top: var(--header-height);
 }
 
 body {
@@ -90,7 +91,7 @@ img {
   position: sticky;
   z-index: 20;
   top: 0;
-  height: 82px;
+  height: var(--header-height);
   background: rgba(255, 255, 255, 0.97);
   box-shadow: 0 1px 0 rgba(42, 46, 48, 0.08);
   backdrop-filter: blur(14px);
@@ -153,8 +154,8 @@ img {
 }
 
 .brand img {
-  width: 58px;
-  height: 58px;
+  width: 102px;
+  height: 102px;
   object-fit: cover;
   object-position: center;
 }
@@ -180,14 +181,16 @@ img {
 }
 
 .header-inner .brand-copy strong {
-  font-size: 15px;
+  font-size: 27px;
+  letter-spacing: 1px;
   line-height: 1;
+  word-spacing: 0;
 }
 
 .header-inner .brand-copy > span {
   margin-top: 0;
-  font-size: 15px;
-  letter-spacing: 1px;
+  font-size: 25.5px;
+  letter-spacing: 1.8px;
   line-height: 1;
 }
 
@@ -206,10 +209,35 @@ img {
 }
 
 .main-nav > a:not(.nav-cta) {
+  position: relative;
+  padding-block: 8px;
   color: #4a5053;
   font-size: 12px;
   font-weight: 500;
+  letter-spacing: 1px;
   transition: color 160ms ease;
+}
+
+.main-nav > a:not(.nav-cta)::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  content: "";
+  background: var(--color-orange);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 160ms ease;
+}
+
+.main-nav > a:not(.nav-cta):hover::after,
+.main-nav > a:not(.nav-cta).is-active::after {
+  transform: scaleX(1);
+}
+
+.main-nav > a:not(.nav-cta).is-active {
+  color: var(--color-orange);
 }
 
 .main-nav > a:not(.nav-cta):hover,
@@ -269,8 +297,8 @@ img {
 .hero {
   position: relative;
   display: flex;
-  min-height: min(690px, calc(100vh - 82px));
-  min-height: clamp(590px, calc(100vh - 82px), 760px);
+  min-height: min(690px, calc(100vh - var(--header-height)));
+  min-height: clamp(590px, calc(100vh - var(--header-height)), 760px);
   overflow: hidden;
   align-items: center;
   color: #fff;
@@ -336,7 +364,8 @@ p {
   margin-bottom: 20px;
   font-size: clamp(44px, 6.3vw, 82px);
   font-weight: 700;
-  letter-spacing: -4px;
+  letter-spacing: 2px;
+  word-spacing: 0;
   line-height: 0.99;
 }
 
@@ -351,10 +380,6 @@ h2 em {
   color: var(--color-accent-on-dark);
 }
 
-.hero h1 .hero-second-line {
-  font-size: 0.82em;
-}
-
 .hero-headline-mobile {
   display: none;
 }
@@ -365,6 +390,19 @@ h2 em {
   color: rgba(255, 255, 255, 0.78);
   font-size: 16px;
   line-height: 1.75;
+}
+
+.hero-tagline {
+  max-width: 700px;
+  margin-top: 0;
+  font-size: clamp(17px, 2vw, 23px);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.hero-tagline em {
+  color: var(--color-accent-on-dark);
+  font-style: normal;
 }
 
 .hero-actions {
@@ -1335,6 +1373,24 @@ h2 em {
 }
 
 @media (max-width: 1050px) {
+  :root {
+    --header-height: 92px;
+  }
+
+  .header-inner .brand img {
+    width: 78px;
+    height: 78px;
+  }
+
+  .header-inner .brand-copy strong {
+    font-size: 21px;
+  }
+
+  .header-inner .brand-copy > span {
+    font-size: 20px;
+    letter-spacing: 1.3px;
+  }
+
   .main-nav {
     gap: 13px;
   }
@@ -1363,6 +1419,10 @@ h2 em {
 }
 
 @media (max-width: 800px) {
+  :root {
+    --header-height: 76px;
+  }
+
   .container,
   .header-inner {
     width: min(100% - 44px, var(--content-width));
@@ -1371,12 +1431,12 @@ h2 em {
   .site-header {
     position: fixed;
     inset: 0 0 auto;
-    height: 72px;
+    height: var(--header-height);
   }
 
   .header-inner .brand img {
-    width: 44px;
-    height: 44px;
+    width: 66px;
+    height: 66px;
   }
 
   .header-inner .brand-copy {
@@ -1384,21 +1444,21 @@ h2 em {
   }
 
   .header-inner .brand-copy strong {
-    font-size: 13px;
-    letter-spacing: -0.6px;
+    font-size: 21px;
+    letter-spacing: -0.7px;
   }
 
   .header-inner .brand-copy > span {
-    font-size: 13px;
-    letter-spacing: 0.6px;
+    font-size: 19.5px;
+    letter-spacing: 1px;
   }
 
   body {
-    padding-top: 118px;
+    padding-top: calc(var(--header-height) + 46px);
   }
 
   html {
-    scroll-padding-top: 122px;
+    scroll-padding-top: calc(var(--header-height) + 50px);
   }
 
   .header-inner {
@@ -1408,7 +1468,7 @@ h2 em {
   .mobile-icon-nav {
     position: fixed;
     z-index: 19;
-    top: 72px;
+    top: var(--header-height);
     right: 0;
     left: 0;
     display: flex;
@@ -1505,7 +1565,7 @@ h2 em {
 
   .main-nav {
     position: absolute;
-    top: 72px;
+    top: var(--header-height);
     right: 0;
     left: 0;
     display: none;
@@ -1537,7 +1597,7 @@ h2 em {
 
   .hero {
     min-height: 650px;
-    min-height: min(720px, calc(100svh - 118px));
+    min-height: min(720px, calc(100svh - var(--header-height) - 46px));
   }
 
   .hero h1 {
@@ -1630,22 +1690,20 @@ h2 em {
     gap: 6px;
   }
 
-  .header-inner .brand img {
-    width: 38px;
-    height: 38px;
-  }
-
   .header-inner .brand-copy {
-    gap: 3px;
+    display: grid;
+    gap: 2px;
   }
 
   .header-inner .brand-copy strong {
-    font-size: 12px;
+    font-size: 18px;
+    letter-spacing: 0.4px;
   }
 
   .header-inner .brand-copy > span {
-    font-size: 12px;
-    letter-spacing: 0.35px;
+    margin-top: 0;
+    font-size: 10.5px;
+    letter-spacing: 2.2px;
   }
 
   .theme-switcher {
@@ -1653,19 +1711,19 @@ h2 em {
   }
 
   .theme-option {
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
   }
 
   .menu-toggle {
-    width: 36px;
+    width: 34px;
     height: 38px;
-    flex: 0 0 36px;
+    flex: 0 0 34px;
   }
 
   .hero {
     min-height: 660px;
-    min-height: min(720px, calc(100svh - 118px));
+    min-height: min(720px, calc(100svh - var(--header-height) - 46px));
     align-items: center;
   }
 
@@ -1684,9 +1742,10 @@ h2 em {
 
   .hero h1 {
     margin-bottom: 16px;
-    font-size: clamp(34px, 9.5vw, 42px);
-    letter-spacing: -1.5px;
-    line-height: 1.02;
+    font-size: clamp(30px, 8.5vw, 36px);
+    letter-spacing: 1px;
+    word-spacing: 0;
+    line-height: 1.12;
   }
 
   .hero-headline-desktop {
@@ -1697,16 +1756,16 @@ h2 em {
     display: inline;
   }
 
-  .hero h1 .hero-second-line {
-    display: inline-block;
-    margin-top: 8px;
-    font-size: 0.76em;
-    line-height: 1.08;
-  }
-
   .hero-intro {
     max-width: 350px;
     font-size: 14px;
+  }
+
+  .hero-tagline {
+    max-width: 340px;
+    margin-bottom: 24px;
+    font-size: clamp(15px, 4.5vw, 18px);
+    line-height: 1.45;
   }
 
   .hero-actions {
@@ -1959,6 +2018,66 @@ h2 em {
 
   .whatsapp-callback {
     bottom: calc(72px + 75px);
+  }
+}
+
+@media (max-width: 380px) {
+  .header-inner .brand img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .header-inner .brand-copy strong {
+    font-size: 17px;
+    letter-spacing: 0.3px;
+  }
+
+  .header-inner .brand-copy > span {
+    font-size: 9.5px;
+    letter-spacing: 1.8px;
+  }
+}
+
+@media (max-width: 340px) {
+  .header-inner,
+  .container {
+    width: calc(100% - 24px);
+  }
+
+  .header-inner {
+    gap: 5px;
+  }
+
+  .header-inner .brand {
+    gap: 4px;
+  }
+
+  .header-inner .brand img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .header-inner .brand-copy strong {
+    font-size: 16px;
+  }
+
+  .header-inner .brand-copy > span {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+  }
+
+  .theme-switcher {
+    gap: 3px;
+  }
+
+  .theme-option {
+    width: 10px;
+    height: 10px;
+  }
+
+  .menu-toggle {
+    width: 30px;
+    flex-basis: 30px;
   }
 }
 
